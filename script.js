@@ -1,42 +1,25 @@
 let next = document.getElementById('next');
 let prev = document.getElementById('previus');
 let slider = document.querySelector('.slider');
-let slides = document.querySelectorAll('.slides');
 
-next.onclick = function () {
+function nextSlide() {
+    let slides = document.querySelectorAll('.slides');
     slider.appendChild(slides[0]);
 }
 
-prev.onclick = function () {
+function prevSlide() {
+    let slides = document.querySelectorAll('.slides');
     slider.prepend(slides[slides.length - 1]);
 }
 
-// Triggering next on right arrow key press
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight') {
-        slider.appendChild(slides[0]);
-    }
-});
+next.onclick = nextSlide;
+prev.onclick = prevSlide;
 
-// Triggering prev on left arrow key press
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') {
-        slider.prepend(slides[slides.length - 1]);
-    }
-});
 
-// Triggering next and prev on scroll
-document.addEventListener('wheel', function (e) {
-    if (e.deltaY > 0) {
-        slider.appendChild(slides[0]);
-    } else {
-        slider.prepend(slides[slides.length - 1]);
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowRight') {
+        next.click();
+    } else if (event.key === 'ArrowLeft') {
+        prev.click();
     }
-});
-
-// Triggering next and prev on individual slide click
-slides.forEach(function (slide) {
-    slide.addEventListener('click', function () {
-        slider.appendChild(slides[0]);
-    });
 });
